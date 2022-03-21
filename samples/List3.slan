@@ -1,0 +1,48 @@
+public class Elem {
+    internal Elem next;
+    string name;
+    public Elem(string name)
+    {
+        this.name = name;
+    }
+    ~Elem() {
+	    Console.Printf("delete %s",name);
+    }
+}
+
+public static class Program {
+    static Elem make3cyclic() {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        A.next = B;
+        B.next = C;
+        C.next = A;
+        return A;
+    }
+
+    static Elem make3nonCyclic()
+    {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        A.next = B;
+        B.next = C;
+        return A;
+    }
+
+    static void Test1() {
+        Elem head = make3cyclic();
+    }
+
+    static void Test2() {
+        Elem head = make3nonCyclic();
+        head = head.next; //elem A should be deleted
+    }
+
+    static void Main()
+    {
+        Test1();
+        Test2();
+    }
+}

@@ -1,0 +1,21 @@
+public class Elem
+{
+   internal Elem next;
+}
+
+public static class Program
+{
+ //cycle len 1000
+    static void Main()
+    {
+        Elem e = new Elem();
+        Elem e2 = e;
+        for (int i=0; i<1000; i++)
+        {
+            Elem tmp = new Elem();
+            tmp.next = e;
+            e = tmp;
+        }
+        e2.next = e; //must be cycle
+    }
+}

@@ -1,0 +1,129 @@
+public class Elem
+{
+    internal Elem next;
+    internal Elem next2;
+    string name;
+    public Elem(string name)
+    {
+        this.name = name;
+    }
+    ~Elem() {
+        Console.Printf("delete %s",name);
+    }
+}
+
+public static class Program
+{
+    static void ApartmentLike()
+    {
+        Elem A = new Elem("Apartment");
+        Elem B = new Elem("Person");
+        A.next = B;
+        B.next = A;
+    }
+
+    static void CycleInMiddle()
+    {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        Elem D = new Elem("D");
+        Elem E = new Elem("E");
+        A.next = B;
+        B.next = C;
+        C.next = D;
+        C.next2 = E;
+        D.next = B; //cycle
+    }
+
+    static void JoinTwo()
+    {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        Elem D = new Elem("D");
+        Elem E = new Elem("E");
+        Elem F = new Elem("F");
+        A.next = B;
+        B.next = F;
+        C.next = D;
+        C.next2 = E;
+        D.next = B;
+    }
+
+    static void JoinTwo2()
+    {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        Elem D = new Elem("D");
+        Elem E = new Elem("E");
+        Elem F = new Elem("F");
+        A.next = B;
+        B.next = F;
+        C.next = D;
+        C.next2 = E;
+        B.next2 = D;
+    }
+
+    static void JoinTwo3()
+    {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        Elem D = new Elem("D");
+        Elem E = new Elem("E");
+        Elem F = new Elem("F");
+        A.next = B;
+        B.next = F;
+        C.next = D;
+        C.next2 = E;
+        B.next2 = C;
+    }
+
+    static void SplitAndJoin()
+    {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        Elem D = new Elem("D");
+        Elem E = new Elem("E");
+        Elem F = new Elem("F");
+        A.next = B;
+        B.next = C;
+        C.next = D;
+
+        E.next = F;
+
+        B.next = null; //this line should not give difference, important is next line
+        B.next = E;
+    }
+
+    static void GroupToOne()
+    {
+        Elem A = new Elem("A");
+        Elem B = new Elem("B");
+        Elem C = new Elem("C");
+        Elem D = new Elem("D");
+        Elem E = new Elem("E");
+        Elem F = new Elem("F");
+        A.next = D;
+        B.next = D;
+        C.next = D;
+        //cycle
+        D.next = E;
+        E.next = F;
+        F.next = D;
+    }
+
+    static void Main()
+    {
+        ApartmentLike();
+        CycleInMiddle();
+        JoinTwo();
+        JoinTwo2();
+        JoinTwo3();
+        SplitAndJoin();
+        GroupToOne();
+    }
+}

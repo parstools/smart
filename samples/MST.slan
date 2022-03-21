@@ -1,0 +1,50 @@
+public class Vertex
+{
+    int id;
+    public Vertex(int id) { //constructor must be public, maybe in future version allow not public for object factories
+        this.id = id;
+    }
+    ~Vertex() {
+        Console.Printf("delete %d",id);
+    }
+    internal Vertex p0; //automatically set to null
+    internal Vertex p1;
+    internal Vertex p2;
+    internal Vertex p3;
+}
+
+public static class Program {
+    static void BuildMst() {
+        Vertex v0 = new Vertex(0);
+        Vertex v1 = new Vertex(1);
+        Vertex v2 = new Vertex(2);
+        Vertex v3 = new Vertex(3);
+        Vertex v4 = new Vertex(4);
+        Vertex v5 = new Vertex(5);
+        Vertex v6 = new Vertex(6);
+        Vertex v7 = new Vertex(7);
+        Vertex v8 = new Vertex(8);
+        Vertex v9 = new Vertex(9);
+        v0.p0 = v1;
+        v0.p1 = v2;
+        v2.p0 = v4;
+        v4.p0 = v0;
+        v4.p1 = v1;
+        v1.p0 = v3;
+        v3.p0 = v0;
+        v4.p2 = v5;
+        v4.p3 = v6;
+        v6.p0 = v7;
+        v6.p1 = v2;
+        v5.p0 = v6;
+        v6.p2 = v8;
+        v8.p0 = v9;
+        v8.p1 = v7;
+        v9.p0 = v5;
+    }
+
+    static void Main()
+    {
+        BuildMst();
+    }
+}

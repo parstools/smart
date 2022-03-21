@@ -1,0 +1,32 @@
+public class Clique
+{
+    const int CliqueSize = 5;
+    int number;
+    public Clique(int number)
+    {
+        tab = new Clique[5];
+        this.number = number;
+    }
+    internal Clique[] tab;
+}
+
+public static class Program
+{
+    const int CliqueSize = Clique.CliqueSize;
+    static void Test()
+    {
+		Clique[] tab = new Clique[CliqueSize];
+        for (int i=0; i<CliqueSize; i++)
+        {
+            tab[i] = new Clique(CliqueSize);
+        }
+        for (int i=0; i<CliqueSize; i++)
+            for (int j=0; j<CliqueSize; j++)
+                tab[i].tab[j] = tab[j];
+    }
+
+    static void Main()
+    {
+        Test();
+    }
+}

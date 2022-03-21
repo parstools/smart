@@ -1,0 +1,40 @@
+public class Apartment
+{
+    internal Person p;
+    internal Owner o;
+     ~Apartment() {
+	    Console.Printf("delete Apartment");
+    }
+}
+
+public class Person
+{
+    internal Apartment a;
+    ~Person() {
+	    Console.Printf("delete Person");
+    }
+}
+
+public class Owner {
+    internal Apartment a;
+    ~Owner() {
+	    Console.Printf("delete Owner");
+    }
+}
+
+public static class Program
+{	
+    static void Main()
+    {
+        Owner o = new Owner();
+        Apartment a = new Apartment();
+        Person p = new Person();
+        a.p = p;
+        p.a = a;
+        o.a = a;
+        a.o = o;
+        a = null; //do nothing
+        p = null; //o keep it
+        o = null; //o,a and p should be deleted
+    }
+}

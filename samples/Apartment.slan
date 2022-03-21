@@ -1,0 +1,26 @@
+public class Apartment
+{
+    internal Person p;
+    ~Apartment() {
+	    Console.Printf("delete Apartment");
+    }
+}
+
+public class Person
+{
+    internal Apartment a;
+	 ~Person() {
+	    Console.Printf("delete Person");
+    }
+}
+
+public static class Program
+{	
+    static void Main()
+    {
+        Apartment a = new Apartment();
+        Person p = new Person();
+        a.p = p;
+        p.a = a;
+     }
+}

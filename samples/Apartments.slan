@@ -1,0 +1,44 @@
+public class Apartment
+{
+    internal Person p;
+    internal Apartment next;
+     ~Apartment() {
+	    Console.Printf("delete Apartment");
+    }
+}
+
+public class Person
+{
+    internal Apartment a;
+    ~Person() {
+	    Console.Printf("delete Person");
+    }
+}
+
+public static class Program
+{	
+    static void Main()
+    {
+	   Apartment a1 = new Apartment();
+		Person p1 = new Person();
+		Apartment a2 = new Apartment();
+		Person p2 = new Person();
+		Apartment a3 = new Apartment();
+		Person p3 = new Person();
+		/*cycles {{a1,b1},{a2,b2},{a3,b3}*/
+
+		a1.p = p1;
+		p1.a = a1;
+
+		a2.p = p2;
+		p2.a = a2;
+
+		a3.p = p3;
+		p3.a = a3;
+
+		//additionally
+		a1.next = a2;
+		a2.next = a3;
+		a3.next = a1;
+   }
+}

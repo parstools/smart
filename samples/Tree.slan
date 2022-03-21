@@ -1,0 +1,50 @@
+public class Node
+{
+    internal Node parent;
+    public Node(Node parent)
+    {
+         this.parent = parent;
+         if (parent!=null)
+            depth = parent.depth+1;
+         else
+            depth = 0;
+         left = right = null;//assignable expression is transitive
+    }
+
+    int depth = 0;
+    internal Node left;
+    internal Node right;
+
+    internal void AddChilds(Node parent)
+    {
+        left = new Node(parent);
+        right = new Node(parent);
+    }
+}
+
+public static class Program
+{
+    static void MakeTree(Node node, int depth)
+    {
+        if (depth==0) return;
+        node.left = new Node(node);
+        MakeTree(node.left, depth-1);
+        node.right = new Node(node);
+        MakeTree(node.right, depth-1);
+    }
+
+    static void TestTree() {
+        Node root = new Node();
+        root.Init(null);
+        MakeTree(root, 5);
+        Node keep;
+        keep = root.left.left.parent;
+        root = null;
+        keep = null;
+    }
+
+    static void Main()
+    {
+        TestTree;
+    }
+}

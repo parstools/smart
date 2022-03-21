@@ -283,8 +283,28 @@ static void buildMst() {
     try_release(&shadow, v0);
 }
 
+void DoubleOneDirection() {
+    for (int i=0; i<2; i++) {
+        Shadow shadow;
+        Elem *A = new Elem("A");
+        Elem *B = new Elem("B");
+        link_assign(A, &shadow, (Object **) &A->next, B);
+        link_assign(A, &shadow, (Object **) &A->next2, B);
+        if (i==0) {
+            try_release(&shadow, B);
+            try_release(&shadow, A);
+        }
+        else {
+            try_release(&shadow, A);
+            try_release(&shadow, B);
+        }
+    }
+}
+
 
 int main() {
+    DoubleOneDirection();
+    return 1;
     ApartmentLike();
     cout << "=========================CycleInMiddle\n";
     CycleInMiddle();

@@ -53,9 +53,9 @@ void lshared_assign_single(Object** pp, Object* p) {
 void link_assign(Object* src, Shadow *shadow, Object** pp, Object* p) {
     assert(pp);
     Object*__tmp = p;
-    if (__tmp != *pp)//coś sie zmieniło
+    if (__tmp != *pp)//something changes
     {
-        //if (src!=p) //nie wskazuje na siebie
+        //if (src!=p) //not points to self
         {
             if (src->use_count<2 && src->link_number==0) {
                 if (__tmp->use_count<2) {
@@ -109,7 +109,7 @@ void link_assign(Object* src, Shadow *shadow, Object** pp, Object* p) {
 void var_assign(Shadow *shadow, Object** pp, Object* p) {
     assert(pp);
     Object*__tmp = p;
-    if (__tmp != *pp)//coś sie zmieniło
+    if (__tmp != *pp)//something changes
     {
         if (__tmp != nullptr) {
                lshared_add_ref_single(__tmp);

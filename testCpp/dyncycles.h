@@ -5,12 +5,12 @@
 #include <vector>
 
 struct Object {
-    int use_count;
+    int ref_count;
     int weak_count;
     int out_count;
     int link_number;
     Object() {
-        use_count = 1;
+        ref_count = 1;
         out_count = 0;
         link_number = 0;
     }

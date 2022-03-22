@@ -1,0 +1,22 @@
+public class Elem {
+    internal Elem next;
+    string name;
+    public Elem(string name)
+    {
+        this.name = name;
+    }
+    ~Elem() {
+	    Console.Printf("delete %s",name);
+    }
+}
+
+public static class Program
+{	
+    static void Main()
+    {
+        Elem a = new Elem("Apartment");
+        Elem b = new Elem("Person");
+        a.next  = b;
+        b.next = a;
+     }
+}

@@ -6,18 +6,18 @@
 #include <iostream>
 
 void lshared_init_elem(Object** pp, Object* p) {
-    p->use_count = 1;
+    p->ref_count = 1;
     *pp = p;
 }
 
 void lshared_add_ref_single(Object* p) {
-    ++p->use_count;
+    ++p->ref_count;
 }
 
 void lshared_release_single(Object** pp) {
     Object *p = *pp;
     if (!p) return;
-    if (--p->use_count == 0)
+    if (--p->ref_count == 0)
     {
         *pp = nullptr;
         delete p;
@@ -32,7 +32,7 @@ void lshared_release_user(Shadow *shadow, Object** pp) {
         shadow->toRelease.push_back(p);
     }
     else
-    if (--p->use_count == 0)
+    if (--p->ref_count == 0)
     {
         *pp = nullptr;
         delete p;
@@ -57,9 +57,9 @@ void link_assign(Object* src, Shadow *shadow, Object** pp, Object* p) {
     {
         //if (src!=p) //not points to self
         {
-            if (src->use_count<2 && src->link_number==0) {
-                if (__tmp->use_count<2) {
-                    //std::cout << "rozpoczynanie nowego grafu od " << shadow->link_counter << std::endl;
+            if (src->ref_count < 2 && src->link_number == 0) {
+                if (__tmp->ref_count < 2) {
+                    //std::cout << "begin new graph from " << shadow->link_counter << std::endl;
                     shadow->NewGraph(shadow->link_counter);
                 }
                 else
@@ -80,7 +80,7 @@ void link_assign(Object* src, Shadow *shadow, Object** pp, Object* p) {
                         isCycle = true;
                     }
                     else if (__tmp->link_number==src->link_number) {
-                        std::cout << "self cykl " << src->link_number
+                        std::cout << "self cycle " << src->link_number
                                   << "->" << __tmp->link_number << std::endl;
                         isCycle = true;
                     }
